@@ -1,0 +1,15 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow superadmins to read/write everything
+    match /{document=**} {
+      allow read, write: if isSuperAdmin();
+    }
+
+    // Helper function to check role
+    function isSuperAdmin() {
+      return request.auth != null && 
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "superadmin";
+    }
+  }
+}
