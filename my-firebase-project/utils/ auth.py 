@@ -1,0 +1,11 @@
+# auth.py
+config = {
+    "apiKey": "fake-api-key",
+    "authDomain": "localhost",
+    "databaseURL": "http://localhost:8080",  # Firestore emulator port
+    "storageBucket": "fake-bucket"
+}
+
+firebase = pyrebase.initialize_app(config)
+auth = firebase.auth()
+auth.use_emulator("http://localhost:9099")  # Auth emulator port

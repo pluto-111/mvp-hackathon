@@ -1,0 +1,10 @@
+import firebase_admin
+from firebase_admin import credentials, firestore
+
+# Initialize Firebase Emulator
+cred = credentials.Certificate("path/to/serviceAccountKey.json")  # Use emulator credentials
+firebase_admin.initialize_app(cred, {
+    projectId: inventory-mas-mvp-4ac2e,
+})
+
+db = firestore.client()
