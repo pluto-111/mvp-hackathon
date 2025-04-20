@@ -1,5 +1,18 @@
-from utils.db import db
+import firebase_admin
+from firebase_admin import credentials, firestore
+import os
 from datetime import datetime, timedelta
+
+# Use the Firestore Emulator
+os.environ["FIRESTORE_EMULATOR_HOST"] = "localhost:8080"
+
+# Initialize Firebase Admin SDK
+cred = credentials.ApplicationDefault()
+firebase_admin.initialize_app(cred, {
+    "projectId": "demo-project-id"  # Replace with your Firebase project ID
+})
+
+db = firestore.client()
 
 def prioritize_clearance():
     # Find items with no sales in 30 days
